@@ -1,0 +1,15 @@
+{
+  "name": "restfulapi",
+  "version": "1.0.0",
+  "description": "restful api test",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Arturo Izquierdo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "firebase-admin": "^5.12.1"
+  }
+}
