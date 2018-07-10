@@ -21,7 +21,7 @@ app.use(function (req, res) {
     res.status(404).send({ url: req.originalUrl + ' URI no encontrada' })
 });
 
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_INTERNAL_PORT || process.env.PORT || 3000);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_INTERNAL_PORT || process.env.PORT || 8080);
 app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || 'localhost');
 
 app.listen(app.get('port'), app.get('ip'), function () {
