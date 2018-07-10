@@ -12,9 +12,7 @@ admin.initializeApp({
 });
 
 app.get('/listaUsuariosITK', function (req, res) {
-    var db = admin.database();
-    var ref = db.ref("listaUsuariosITK");
-    ref.once("value", function (snapshot) {
+    admin.database().ref("listaUsuariosITK").once("value", function (snapshot) {
         console.log('lista enviada');
         res.send(snapshot.val());
     });
@@ -23,8 +21,9 @@ app.use(function (req, res) {
     res.status(404).send({ url: req.originalUrl + ' URI no encontrada' })
 });
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
-var server = app.listen(server_port, server_ip_address, function () {
-    console.log("Listening on " + server_ip_address + ", port " + server_port);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_INTERNAL_PORT || process.env.PORT || 3000);
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || 'localhost');
+
+app.listen(app.get('port'), app.get('ip'), function () {
+    console.log("Express server listening on " + app.get('ip') + ":" + app.get('port'));
 });
