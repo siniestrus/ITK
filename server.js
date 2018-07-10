@@ -12,14 +12,18 @@ admin.initializeApp({
 });
 
 app.get('/listaUsuariosITK', function (req, res) {
-    admin.database().ref("listaUsuariosITK").once("value", function (snap) {
+    admin.database().ref("ITK/listaUsuariosITK").once("value", function (snap) {
         var lista = [];
         if (snap.val()) {
             snap.forEach(function (child) {
                 lista.push(child.val());
             });
+            console.log('lista enviada');
         }
-        console.log('lista enviada');
+        else {
+            lista.push('No hay elementos');
+            console.log('No hay elementos');
+        }
         res.send(lista);
     });
 });
